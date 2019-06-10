@@ -1,0 +1,60 @@
+{
+  "name": "vueproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build/build.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "lint": "eslint --ext .js --ext .jsx --ext .vue src/",
+    "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lihuangwei/vueproject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lihuangwei/vueproject/issues"
+  },
+  "homepage": "https://github.com/lihuangwei/vueproject#readme",
+  "devDependencies": {
+    "autodll-webpack-plugin": "^0.4.2",
+    "autoprefixer": "^9.6.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-html": "^5.0.5",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "file-loader": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.7.0",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "vue-loader": "^15.7.0",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.33.0",
+    "webpack-cli": "^3.3.3",
+    "webpack-dev-server": "^3.7.1",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "vue": "^2.6.10"
+  }
+}
