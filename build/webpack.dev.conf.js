@@ -2,6 +2,7 @@ const merge = require('webpack-merge');
 const path = require('path');
 const baseConfig = require('./webpack.base.conf');
 const webpack = require('webpack');
+
 module.exports = merge(baseConfig, {
     mode: 'development',
     devtool: 'inline-source-map',
@@ -21,9 +22,14 @@ module.exports = merge(baseConfig, {
                 ]
             },
             {
-                test: /\.styl(us)$/,
-                use: ['vue-style-loader', 'css-loader', 'stylus-loader', 'postcss-loader']
+                test: /\.scss$/,
+                use:['vue-style-loader','css-loader','postcss-loader','sass-loader'],
             }
+            // {
+            //     test: /\.styl(us)$/,
+            //     use: ['vue-style-loader', 'css-loader', 'stylus-loader', 'postcss-loader']
+            // },
+            
         ]
     },
     plugins: [

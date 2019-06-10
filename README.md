@@ -2,9 +2,9 @@
 ## 一、初始化项目
 在命令行中敲入如下命令：
 ```bash
-mkdir Webpack-Vue && cd Webpack-Vue && npm init -y
+mkdir VueProject && cd VueProject && npm init -y
 ```
-然后你就可以在你的当前路径下看到一个叫 Webpack-Vue 的文件夹，里面有一个包含默认信息的 package.json 文件，打开并修改这个文件的一些内容。
+然后你就可以在你的当前路径下看到一个叫 VueProject 的文件夹，里面有一个包含默认信息的 package.json 文件，打开并修改这个文件的一些内容。
 然后我们在项目文件夹中创建以下几个文件夹：
 
 dist
@@ -37,6 +37,23 @@ touch ./src/index.js
 ```
 这将用于作为我们应用的模板，打包的 js 文件会在 Webpack 插件的处理下插入到这个文件中。
 其他配置性文件根据你自己的喜好来添加了，比如 .gitignore 文件等。
+根目录新建.gitignore文件配置如下：
+```bash
+.DS_Store
+node_modules/
+/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+```
 ## 二、安装 Webpack
 要使用 Webpack，第一步当然是先安装。使用以下命令进行安装：
 ```bash
@@ -103,7 +120,7 @@ module.exports = merge(baseConfig, {
 继续写入最基础的配置：
 ```bash
 const merge = require('webpack-merge');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const path = require('path');
 const baseConfig = require('./webpack.base.conf');
 module.exports = merge(baseConfig, {
@@ -113,17 +130,18 @@ module.exports = merge(baseConfig, {
     rules: []
   },
   plugins: [
-    new CleanWebpackPlugin(['dist/'], {
+    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
       root: path.resolve(__dirname, '../'),
       verbose: true,
       dry: false
-    })
+    }),
   ]
 });
 ```
 注意到我们上面引用了两个新的依赖，需要先进行安装才能使用：
 ```bash
-cnpm i webpack-merge clean-webpack-plugin webpack-dev-server html-webpack-plugin -D
+npm i webpack-merge clean-webpack-plugin webpack-dev-server html-webpack-plugin -D
 ```
 (4) build.js
 这个脚本用于构建生产环境，开发环境基于 webpack-dev-server 搭建，不写脚本。
@@ -404,6 +422,10 @@ new AutoDllPlugin({
   }
 })
 ```
+并安装vue-router和vuex
+```bash
+npm install vue-router vuex -d
+```
 inject 为 true，插件会自动把打包出来的第三方库文件插入到 HTML。filename 是打包后文件的名称。path 是打包后的路径。entry 是入口，vendor 是你指定的名称，数组内容就是要打包的第三方库的名称，不要写全路径，Webpack 会自动去 node_modules 中找到的。
 每次打包，这个插件都会检查注册在 entry 中的第三方库是否发生了变化，如果没有变化，插件就会使用缓存中的打包文件，减少了打包的时间，这时 Hash 也不会变化。
 ## 八、提取共同代码：
@@ -415,9 +437,8 @@ new webpack.optimize.SplitChunksPlugin()
 ```
 这代表你将使用默认的提取配置来提取你的公共代码，如果你不想使用默认配置，请给插件构造函数传入配置对象.
 具体怎么配置，请参考冷星大神的博客 —— webpack4——SplitChunksPlugin使用指南，里面关于配置项的作用介绍得很清楚很详细。
-## 九、使用 stylus 预处理器
-我个人比较喜欢 stylus，因为写起来比较无拘无束，类似 Python，没那么多条条框框，而且用起来也不是很复杂。
-引入方法：
+## 九、使用 stylus 或者 sass 预处理器
+styus引入方法：
 首先下载 stylus 和 stylus-loader 依赖：
 ```bash
 npm i stylus stylus-loader -D
@@ -432,6 +453,20 @@ npm i stylus stylus-loader -D
 }
 ```
 接下来只要你在 Vue 单文件组件的 style 标签加上 lang='stylus'，你就可以使用 stylus 来写 CSS 了。
+sass引入方法：
+首先下载 sass 和 sass-loader 依赖：
+```bash
+npm i stylus sass-loader -D
+npm i node-sass -D
+```
+配置信息如下：
+```bash
+{
+    test: /\.scss$/,
+    loader: ['vue-style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
+}
+```
+接下来只要你在 Vue 单文件组件的 style 标签加上 lang='sass'，你就可以使用 sass 来写 CSS 了。
 ## 十、抽取 CSS 到单文件
 这个功能的配置方法在 Vue Loader 官网交代得很清楚了。
 使用的是 mini-css-extract-plugin 插件，首先安装：

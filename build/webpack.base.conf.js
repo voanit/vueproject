@@ -42,12 +42,12 @@ module.exports = {
                     'file-loader'
                 ]
             },
-            {
-                test: /\.(vue|js)$/,
-                use: 'eslint-loader',
-                exclude: /node_modules/,
-                enforce: 'pre'
-            }
+            // {
+            //     test: /\.(vue|js)$/,
+            //     use: 'eslint-loader',
+            //     exclude: /node_modules/,
+            //     enforce: 'pre'
+            // }
         ]
     },
     plugins: [
@@ -64,6 +64,6 @@ module.exports = {
             }
         }),
         new VueLoaderPlugin(),
-        new webpack.optimize.SplitChunksPlugin()
+        new webpack.optimize.SplitChunksPlugin(),
     ]
 };
