@@ -30,7 +30,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     new CleanWebpackPlugin(),
     new CleanWebpackPlugin({
-      root: path.resolve(__dirname, '../'),
+      root: path.resolve(__dirname, '../static'),
       verbose: true,
       dry: false
     }),
